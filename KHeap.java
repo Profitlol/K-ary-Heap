@@ -138,14 +138,7 @@ public class KHeap
         {
             key = index;
         }
-        
-        @Override
-        public String toString() 
-        {
-            StringBuilder sb = new StringBuilder();
-            sb.append("Key: " + key);
-            return sb.toString();
-        }
+
     }
 
     public static void main(String[] args) 
