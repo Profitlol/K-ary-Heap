@@ -1,5 +1,4 @@
 package kheap;
-import java.io.FileNotFoundException;
 import java.util.*;
 import java.io.*;
 /**
@@ -17,7 +16,7 @@ public class KHeap
     public KHeap(int children) 
     {
         k = children;
-        heap = new Node[1000];
+        heap = new Node[100];
         currentSize = 0;
     }
 
@@ -62,6 +61,7 @@ public class KHeap
 
     public void insert(int v) 
     {
+        currentSize++;
         if (size() == heap.length) 
             resize();        
         int hole = currentSize;
@@ -72,7 +72,7 @@ public class KHeap
         x.parentPos = parentPosition(x); // that Math floor thing       
         while (x.key < heap[parentPosition(x)].key) 
             swap(x, heap[parentPosition(x)]);        
-        currentSize++;
+        
 
     }
 
@@ -107,7 +107,7 @@ public class KHeap
     
     public Node extractMin() throws FileNotFoundException 
         {
-            long startTime = System.nanoTime();
+            //long startTime = System.nanoTime();
             Node min = heap[0];
             heap[0] = heap[currentSize - 1];
             heap[0].pos = 0;
@@ -115,7 +115,7 @@ public class KHeap
             heap[currentSize - 1] = null;
             currentSize--;
             siftDown(0);
-            long endTime = System.nanoTime();
+            //long endTime = System.nanoTime();
 //            boolean DEBUG = true; // w hat?
 //            if (DEBUG) {
 //                System.out.println(min + " new min = " + heap[0]);
