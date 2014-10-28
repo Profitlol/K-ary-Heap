@@ -12,7 +12,7 @@ public class KHeap
     public Node[] heap;
     public int currentSize;
     public int k;
-    List<String> input; // using this for output
+    // List<String> input; // using this for output
 
     public KHeap(int children) 
     {
@@ -46,7 +46,6 @@ public class KHeap
         int min = x.key;
         int minPos = 0;
         // " i " will be the child's index
-        // the 
         for (int i = x.pos + 1; i <= (k * x.pos) + k; i++) 
         {
             if (heap[i] != null) 
