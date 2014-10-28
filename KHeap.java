@@ -11,7 +11,7 @@ public class KHeap
     public Node[] heap;
     public int currentSize;
     public int k;
-    // List<String> input; // using this for output
+    List<String> input; // using this for output
 
     public KHeap(int children) 
     {
@@ -20,6 +20,9 @@ public class KHeap
         currentSize = 0;
     }
 
+    public KHeap()
+    {
+    }
     //getting Node x's n(th) child 
     public Node getChild(Node x, int n) 
     {
@@ -71,8 +74,7 @@ public class KHeap
         x.pos = hole;
         x.parentPos = parentPosition(x); // that Math floor thing       
         while (x.key < heap[parentPosition(x)].key) 
-            swap(x, heap[parentPosition(x)]);        
-        
+            swap(x, heap[parentPosition(x)]);                
 
     }
 
@@ -139,10 +141,46 @@ public class KHeap
         }
 
     }
-
-    public static void main(String[] args) 
+///////SHIT DOES NOT WORK DOWN HERE
+    public static void main(String[] args) throws FileNotFoundException 
     {
-        
+        ArrayList<String> input = new ArrayList<String>();
+        int count = 0;
+        try {
+            Scanner scan = new Scanner(new File("karyHeap-input.txt"));
+            //KHeap tester = new KHeap();
+            while(scan.hasNextLine())
+            {
+                String line = scan.nextLine();
+                input.add(line);
+                count++;
+            }
+            for(int i =2; i <= 10; i +=2)
+            {
+                KHeap k = new KHeap(i);
+                double start = System.nanoTime();
+                for(int j= 0;j < input.size(); j+=2)
+                {
+                    String s = input.get(j);
+                    String[] op = s.split(" ");
+                    if (op[j].compareTo("IN") == 0) 
+                    {
+                        k.insert(Integer.parseInt(op[j+1]));
+                    }
+                    if (op[j].compareTo("EX") == 0) 
+                    {
+                        Node n = k.extractMin();
+                        System.out.println(n);
+                    }
+                }
+                double end = System.nanoTime();
+		double elapsed = (end-start)/1000.0;
+		System.out.println(elapsed + " micro-sec \n");
+            }
+
+        } catch (IOException e) {
+            System.out.println("Theres no file");
+        }
     }
-    
+
 }
