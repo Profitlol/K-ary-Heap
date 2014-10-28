@@ -12,6 +12,7 @@ public class KHeap
     public int currentSize;
     public int k;
     List<String> input; // using this for output
+    public int eCount = 0; // possible global counter for swtich cases
 
     public KHeap(int children) 
     {
@@ -210,7 +211,9 @@ public class KHeap
 		}
 		if (op[0].compareTo("EX") == 0) {
 			Node n = k.extractMin();
-			System.out.println(n);
+			System.out.println(n); 
+                        // made a global eCount variable 
+                        //for switch later
 		}
 	}
 
