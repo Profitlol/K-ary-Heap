@@ -11,12 +11,12 @@ public class KHeap
     public int currentSize;
     public int k;
     List<String> input; // using this for output
-    public int eCount = 0; // possible global counter for swtich cases
+    public int eCount = 0;
 
     public KHeap(int children) 
     {
         k = children;
-        heap = new Node[100]; // make super big 100000f
+        heap = new Node[100000]; // made this thing 100k
         currentSize = 0;
     }
 
@@ -35,12 +35,6 @@ public class KHeap
     public int parentPosition(Node x) 
     {
         return (int) Math.floor((x.pos - 1) / k);
-    }
-
-    // if arr is full. i'm just making it 2x bigger
-    public void resize()  
-    {
-        heap = Arrays.copyOf(heap, (heap.length * 2));
     }
 
     public Node minChild(Node x) 
@@ -64,8 +58,6 @@ public class KHeap
 
     public void insert(int v) 
     {        
-        if (size() == heap.length) 
-            resize();        
         int hole = currentSize;
         Node x = new Node(v);
         // sifting up
@@ -108,7 +100,6 @@ public class KHeap
     
     public Node extractMin() throws FileNotFoundException 
         {
-            //long startTime = System.nanoTime();
             Node min = heap[0];
             heap[0] = heap[currentSize - 1];
             heap[0].pos = 0;
@@ -116,14 +107,6 @@ public class KHeap
             heap[currentSize - 1] = null;
             currentSize--;
             siftDown(0);
-            //long endTime = System.nanoTime();
-//            boolean DEBUG = true; // w hat?
-//            if (DEBUG) {
-//                System.out.println(min + " new min = " + heap[0]);
-//            }
-//            if (DEBUG) {
-//                System.out.println("ExtractMin Time = " + ((endTime - startTime) / 1000));
-//            }
             return min;
         } 
 
@@ -142,7 +125,8 @@ public class KHeap
         // this is needed to print the output. i'm not sure why, but i read it
         // on the internet
         @Override
-	public String toString() {
+	public String toString() 
+        {
 		StringBuilder sb = new StringBuilder();
 		sb.append(key);
 		return sb.toString();
@@ -167,7 +151,7 @@ public class KHeap
 				inp.opRunner(s, k);			
 			double end = System.nanoTime();
 			double elapsed = (end-start)/1000.0;
-			System.out.println(elapsed + " micro-sec \n");
+			System.out.printf("%.0f micro-sec\n", elapsed);
 		}
 
 	}
@@ -202,16 +186,15 @@ public class KHeap
 	// i noticed that  shit was getting crazy in the main function
         // i needed this so i can do my comparisions without worrying about
         // too many fucking brackets and parens
-	public void opRunner(String s, KHeap k) throws FileNotFoundException {
+	public void opRunner(String s, KHeap k) throws FileNotFoundException 
+        {
 		String[] op = s.split(" ");
-		if (op[0].compareTo("IN") == 0) {
+		if (op[0].compareTo("IN") == 0) 
 			k.insert(Integer.parseInt(op[1]));
-		}
-		if (op[0].compareTo("EX") == 0) {
+		if (op[0].compareTo("EX") == 0) 
+                {
 			Node n = k.extractMin();
 			System.out.println(n); 
-                        // made a global eCount variable 
-                        //for switch later
 		}
 	}
 
