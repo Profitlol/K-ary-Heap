@@ -11,7 +11,7 @@ public class KHeap
     public int currentSize;
     public int k;
     List<String> input; // using this for output
-    public int eCount = 0;
+    static PrintWriter writer;
 
     public KHeap(int children) 
     {
@@ -131,28 +131,36 @@ public class KHeap
 		sb.append(key);
 		return sb.toString();
 	}
+
     }
+
 
     // the micro-sec will vary from each run time. 
     // 2 = shittiest since u have to traverse a lot
     // at a certain point of K children it levels out & becomes 
     // relatively same speed. this is what you should notice
-    public static void main(String[] args) throws FileNotFoundException 
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException 
     {
 		String filepath = "karyHeap-input.txt";
 		KHeap inp = new KHeap();
 		inp.loadfile(filepath);
+                writer = new PrintWriter("theOutput.txt", "UTF-8");
 		for (int i = 2; i <= 10; i += 2) 
                 {
-			System.out.println("For k=" + i + " children");
+			//System.out.println("For k=" + i + " children");
 			KHeap k = new KHeap(i);
 			double start = System.nanoTime();
 			for (String s : inp.input) 
 				inp.opRunner(s, k);			
 			double end = System.nanoTime();
 			double elapsed = (end-start)/1000.0;
-			System.out.printf("%.0f micro-sec\n", elapsed);
+                        System.out.printf("%.0f micro-sec\n", elapsed);
+                        System.out.println();
+			writer.printf("%.0f micro-sec", elapsed);
+                        writer.println();
+                        writer.println();
 		}
+                writer.close();
 
 	}
         // i will put all the lines of input into a giant ArrayList
@@ -195,6 +203,7 @@ public class KHeap
                 {
 			Node n = k.extractMin();
 			System.out.println(n); 
+                        writer.println(n);                        
 		}
 	}
 
