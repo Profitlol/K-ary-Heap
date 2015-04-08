@@ -136,7 +136,7 @@ public class KHeap
 
 
     // the micro-sec will vary from each run time. 
-    // 2 = shittiest since u have to traverse a lot
+    // 2 = worst since u have to traverse a lot
     // at a certain point of K children it levels out & becomes 
     // relatively same speed. this is what you should notice
     public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException 
@@ -191,9 +191,9 @@ public class KHeap
 			return false;
 	}
 
-	// i noticed that  shit was getting crazy in the main function
+	// i noticed that  stuff was getting crazy in the main function
         // i needed this so i can do my comparisions without worrying about
-        // too many fucking brackets and parens
+        // too many brackets and parens
 	public void opRunner(String s, KHeap k) throws FileNotFoundException 
         {
 		String[] op = s.split(" ");
